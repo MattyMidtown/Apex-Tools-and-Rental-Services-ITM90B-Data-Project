@@ -1,0 +1,756 @@
+USE [TRMS]
+GO
+
+/****** Object:  Table [dbo].[Account]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Account](
+	[AccountID] [nchar](20) NOT NULL,
+	[BusinessType] [varchar](15) NOT NULL,
+	[EmailAddressID] [nchar](10) NULL,
+ CONSTRAINT [PK__Account__349DA586F0C50733] PRIMARY KEY CLUSTERED 
+(
+	[AccountID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[AccountAddress]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AccountAddress](
+	[EmailAddressID] [nchar](10) NOT NULL,
+	[EmailAddress] [varchar](25) NOT NULL,
+	[PasswordID] [nchar](5) NULL,
+ CONSTRAINT [PK__AccountA__9EFF6FE27B35A733] PRIMARY KEY CLUSTERED 
+(
+	[EmailAddressID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[AccountPaymentInfoRel]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AccountPaymentInfoRel](
+	[AccountPaymentInfoRelID] [nchar](20) NOT NULL,
+	[AccountID] [nchar](20) NOT NULL,
+	[CardID] [nchar](20) NOT NULL,
+ CONSTRAINT [PK__AccountP__118643135E23404A] PRIMARY KEY CLUSTERED 
+(
+	[AccountPaymentInfoRelID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Address]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Address](
+	[AddressID] [nchar](10) NOT NULL,
+	[AddressLine1] [varchar](25) NULL,
+	[AddressLine2] [varchar](25) NULL,
+	[City] [varchar](25) NULL,
+	[PostalCode] [varchar](8) NULL,
+	[LastUpdate] [date] NULL,
+	[ProvID] [nchar](10) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[AddressID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[CompanyEntity]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CompanyEntity](
+	[CompanyEntityID] [nchar](10) NOT NULL,
+	[Name] [varchar](25) NULL,
+ CONSTRAINT [PK__CompanyE__F70F2EC22A3A03A4] PRIMARY KEY CLUSTERED 
+(
+	[CompanyEntityID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[CompanyEntityAddressRel]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CompanyEntityAddressRel](
+	[AddressID] [nchar](10) NULL,
+	[CompanyEntityID] [nchar](10) NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Defects]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Defects](
+	[DefectID] [int] NOT NULL,
+	[RetrivalID] [varchar](15) NOT NULL,
+	[Order_ProductRelID] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_Defects] PRIMARY KEY CLUSTERED 
+(
+	[DefectID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Employee]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Employee](
+	[EmployeeID] [nchar](10) NOT NULL,
+	[FirstName] [nchar](20) NOT NULL,
+	[LastName] [nchar](30) NOT NULL,
+	[Phone] [varchar](15) NULL,
+	[Email] [varchar](30) NULL,
+	[RoleID] [nchar](5) NULL,
+	[StoreID] [nchar](2) NULL,
+ CONSTRAINT [PK__Employee__7AD04FF1462E5704] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Invoice]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Invoice](
+	[InvoiceID] [varchar](10) NOT NULL,
+	[DateGenerated] [date] NULL,
+	[PaymentDue] [date] NOT NULL,
+ CONSTRAINT [PK__Invoice__D796AAD52CF605B9] PRIMARY KEY CLUSTERED 
+(
+	[InvoiceID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Order_ProductRel]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Order_ProductRel](
+	[Order_ProductRelID] [nchar](10) NOT NULL,
+	[OrderID] [varchar](15) NOT NULL,
+	[ProductSerialNumber] [varchar](15) NOT NULL,
+ CONSTRAINT [PK__Order_Pr__F528313870AF2D70] PRIMARY KEY CLUSTERED 
+(
+	[Order_ProductRelID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Orders]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Orders](
+	[OrderID] [varchar](15) NOT NULL,
+	[InvoiceID] [varchar](10) NULL,
+	[StartDate] [date] NULL,
+	[EndDate] [date] NULL,
+	[OrderRecievedDate] [date] NULL,
+	[Status] [varchar](20) NULL,
+	[StatusDateChanged] [date] NULL,
+	[AccountID] [nchar](20) NULL,
+	[ReferenceOrderID] [varchar](15) NULL,
+ CONSTRAINT [PK__Order__C3905BAFC0F1D633] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Password]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Password](
+	[PasswordID] [nchar](5) NOT NULL,
+	[CurrentPassword] [nchar](20) NULL,
+	[DateChanged] [date] NULL,
+ CONSTRAINT [PK_Password] PRIMARY KEY CLUSTERED 
+(
+	[PasswordID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Payment]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Payment](
+	[PaymentID] [nchar](10) NOT NULL,
+	[InvoiceID] [varchar](10) NULL,
+	[PaymentDate] [date] NULL,
+ CONSTRAINT [PK__Payment__9B556A58A1E00B10] PRIMARY KEY CLUSTERED 
+(
+	[PaymentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PaymentInfo]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PaymentInfo](
+	[CardID] [nchar](20) NOT NULL,
+	[PaymentType] [varchar](15) NULL,
+ CONSTRAINT [PK__PaymentI__55FECD8EE454609D] PRIMARY KEY CLUSTERED 
+(
+	[CardID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Penalties]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Penalties](
+	[PenaltyID] [varchar](10) NOT NULL,
+	[PenaltyTypeName] [varchar](20) NOT NULL,
+	[PenaltyFee] [nchar](10) NOT NULL,
+ CONSTRAINT [PK__Penaltie__567E06E7EE4C9460] PRIMARY KEY CLUSTERED 
+(
+	[PenaltyID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PenaltyOrderRel]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PenaltyOrderRel](
+	[PenaltyOrderID] [varchar](50) NOT NULL,
+	[OrderID] [varchar](15) NOT NULL,
+	[PenaltyID] [varchar](10) NOT NULL,
+ CONSTRAINT [PK_PenaltyOrderRel] PRIMARY KEY CLUSTERED 
+(
+	[PenaltyOrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Person]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Person](
+	[PersonID] [varchar](20) NOT NULL,
+	[FirstName] [varchar](20) NULL,
+	[MiddleName] [varchar](20) NULL,
+	[LastName] [varchar](20) NULL,
+	[CompanyEntityID] [nchar](10) NULL,
+	[AccountID] [nchar](20) NULL,
+	[RoleID] [nchar](5) NULL,
+	[ProjectManagerID] [varchar](20) NULL,
+	[DateCreated] [date] NULL,
+	[Status] [varchar](50) NULL,
+	[LastUpdate] [date] NULL,
+ CONSTRAINT [PK__Person__AA2FFB856F6B1BB4] PRIMARY KEY CLUSTERED 
+(
+	[PersonID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[PhoneNumber]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PhoneNumber](
+	[PhoneNumber] [varchar](20) NOT NULL,
+	[PersonID] [varchar](20) NULL,
+	[PhoneType] [varchar](20) NULL,
+	[DateUpdated] [date] NULL,
+ CONSTRAINT [PK__PhoneNum__85FB4E3977AD3679] PRIMARY KEY CLUSTERED 
+(
+	[PhoneNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Product]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Product](
+	[ProductID] [varchar](30) NOT NULL,
+	[Name] [varchar](30) NULL,
+	[Model] [varchar](50) NULL,
+	[SubCategoryID] [varchar](50) NULL,
+	[Weight] [varchar](30) NULL,
+	[WeightMeasureCode] [varchar](30) NULL,
+	[RentalCost] [varchar](30) NULL,
+	[HexColour] [varchar](30) NULL,
+	[DateAdded] [date] NULL,
+	[DateRemoved] [date] NULL,
+	[Status] [varchar](15) NULL,
+ CONSTRAINT [PK__Product__B40CC6ED718290BB] PRIMARY KEY CLUSTERED 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[ProductCategory]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ProductCategory](
+	[ProductCategoryID] [nchar](5) NOT NULL,
+	[ProductCategoryName] [varchar](20) NULL,
+	[DateModified] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ProductCategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[ProductInventory]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ProductInventory](
+	[ProductSerialNumber] [varchar](15) NOT NULL,
+	[ProductID] [varchar](30) NULL,
+	[Shelf] [varchar](10) NULL,
+	[StoreID] [nchar](2) NULL,
+	[RentalStartDate] [date] NULL,
+	[RentalendDate] [date] NULL,
+	[Status] [varchar](50) NULL,
+ CONSTRAINT [PK__ProductI__048A00095379C054] PRIMARY KEY CLUSTERED 
+(
+	[ProductSerialNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Province]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Province](
+	[ProvID] [nchar](10) NOT NULL,
+	[ProvName] [varchar](25) NULL,
+	[Abbreviation] [varchar](2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ProvID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Refunds]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Refunds](
+	[RefundID] [nchar](5) NOT NULL,
+	[RetrivalID] [varchar](15) NULL,
+ CONSTRAINT [PK_Refunds] PRIMARY KEY CLUSTERED 
+(
+	[RefundID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Retrieval]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Retrieval](
+	[RetrivalID] [varchar](15) NOT NULL,
+	[EmployeeID] [nchar](10) NULL,
+	[OrderID] [varchar](15) NULL,
+	[RetrivalType] [varchar](30) NULL,
+	[DateRetrived] [date] NULL,
+ CONSTRAINT [PK__Retrieva__ED0AFF2F3CE7AE6A] PRIMARY KEY CLUSTERED 
+(
+	[RetrivalID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[RoleType]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[RoleType](
+	[RoleID] [nchar](5) NOT NULL,
+	[Name] [varchar](20) NULL,
+	[DateAdded] [date] NULL,
+ CONSTRAINT [PK__RoleType__8AFACE3AD95AA571] PRIMARY KEY CLUSTERED 
+(
+	[RoleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Shipment]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Shipment](
+	[ShipmentID] [varchar](50) NOT NULL,
+	[EmployeeID] [nchar](10) NOT NULL,
+	[OrderID] [varchar](15) NOT NULL,
+	[ShippingDate] [date] NULL,
+	[Status] [varchar](50) NULL,
+ CONSTRAINT [PK__Shipment__152BFF87F836FE96] PRIMARY KEY CLUSTERED 
+(
+	[ShipmentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Store]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Store](
+	[StoreID] [nchar](2) NOT NULL,
+	[AddressID] [nchar](10) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[StoreID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[SubProductCategory]    Script Date: 2021-11-04 2:50:44 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[SubProductCategory](
+	[SubProductCategoryID] [varchar](50) NOT NULL,
+	[ProductCategoryID] [nchar](5) NOT NULL,
+	[SubProductCategoryName] [varchar](20) NULL,
+	[DateModified] [date] NULL,
+ CONSTRAINT [PK__SubProdu__696C2E8024489BC8] PRIMARY KEY CLUSTERED 
+(
+	[SubProductCategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Account]  WITH CHECK ADD  CONSTRAINT [FK_Account_AccountAddress] FOREIGN KEY([EmailAddressID])
+REFERENCES [dbo].[AccountAddress] ([EmailAddressID])
+GO
+
+ALTER TABLE [dbo].[Account] CHECK CONSTRAINT [FK_Account_AccountAddress]
+GO
+
+ALTER TABLE [dbo].[AccountAddress]  WITH CHECK ADD  CONSTRAINT [FK_AccountAddress_Password] FOREIGN KEY([PasswordID])
+REFERENCES [dbo].[Password] ([PasswordID])
+GO
+
+ALTER TABLE [dbo].[AccountAddress] CHECK CONSTRAINT [FK_AccountAddress_Password]
+GO
+
+ALTER TABLE [dbo].[AccountPaymentInfoRel]  WITH CHECK ADD  CONSTRAINT [FK_AccountPaymentInfoRel_Account] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountID])
+GO
+
+ALTER TABLE [dbo].[AccountPaymentInfoRel] CHECK CONSTRAINT [FK_AccountPaymentInfoRel_Account]
+GO
+
+ALTER TABLE [dbo].[AccountPaymentInfoRel]  WITH CHECK ADD  CONSTRAINT [FK_AccountPaymentInfoRel_PaymentInfo] FOREIGN KEY([CardID])
+REFERENCES [dbo].[PaymentInfo] ([CardID])
+GO
+
+ALTER TABLE [dbo].[AccountPaymentInfoRel] CHECK CONSTRAINT [FK_AccountPaymentInfoRel_PaymentInfo]
+GO
+
+ALTER TABLE [dbo].[Address]  WITH CHECK ADD  CONSTRAINT [FK_Address_Province] FOREIGN KEY([ProvID])
+REFERENCES [dbo].[Province] ([ProvID])
+GO
+
+ALTER TABLE [dbo].[Address] CHECK CONSTRAINT [FK_Address_Province]
+GO
+
+ALTER TABLE [dbo].[CompanyEntityAddressRel]  WITH CHECK ADD  CONSTRAINT [FK_CompanyEntityAddressRel_Address] FOREIGN KEY([AddressID])
+REFERENCES [dbo].[Address] ([AddressID])
+GO
+
+ALTER TABLE [dbo].[CompanyEntityAddressRel] CHECK CONSTRAINT [FK_CompanyEntityAddressRel_Address]
+GO
+
+ALTER TABLE [dbo].[CompanyEntityAddressRel]  WITH CHECK ADD  CONSTRAINT [FK_CompanyEntityAddressRel_CompanyEntity] FOREIGN KEY([CompanyEntityID])
+REFERENCES [dbo].[CompanyEntity] ([CompanyEntityID])
+GO
+
+ALTER TABLE [dbo].[CompanyEntityAddressRel] CHECK CONSTRAINT [FK_CompanyEntityAddressRel_CompanyEntity]
+GO
+
+ALTER TABLE [dbo].[Defects]  WITH CHECK ADD  CONSTRAINT [FK_Defects_Order_ProductRel1] FOREIGN KEY([Order_ProductRelID])
+REFERENCES [dbo].[Order_ProductRel] ([Order_ProductRelID])
+GO
+
+ALTER TABLE [dbo].[Defects] CHECK CONSTRAINT [FK_Defects_Order_ProductRel1]
+GO
+
+ALTER TABLE [dbo].[Defects]  WITH CHECK ADD  CONSTRAINT [FK_Defects_Retrieval1] FOREIGN KEY([RetrivalID])
+REFERENCES [dbo].[Retrieval] ([RetrivalID])
+GO
+
+ALTER TABLE [dbo].[Defects] CHECK CONSTRAINT [FK_Defects_Retrieval1]
+GO
+
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Store] FOREIGN KEY([StoreID])
+REFERENCES [dbo].[Store] ([StoreID])
+GO
+
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Store]
+GO
+
+ALTER TABLE [dbo].[Order_ProductRel]  WITH CHECK ADD  CONSTRAINT [FK_Order_ProductRel_Order] FOREIGN KEY([OrderID])
+REFERENCES [dbo].[Orders] ([OrderID])
+GO
+
+ALTER TABLE [dbo].[Order_ProductRel] CHECK CONSTRAINT [FK_Order_ProductRel_Order]
+GO
+
+ALTER TABLE [dbo].[Order_ProductRel]  WITH CHECK ADD  CONSTRAINT [FK_Order_ProductRel_ProductInventory] FOREIGN KEY([ProductSerialNumber])
+REFERENCES [dbo].[ProductInventory] ([ProductSerialNumber])
+GO
+
+ALTER TABLE [dbo].[Order_ProductRel] CHECK CONSTRAINT [FK_Order_ProductRel_ProductInventory]
+GO
+
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Order_Account] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountID])
+GO
+
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Order_Account]
+GO
+
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Order_Invoice] FOREIGN KEY([InvoiceID])
+REFERENCES [dbo].[Invoice] ([InvoiceID])
+GO
+
+ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Order_Invoice]
+GO
+
+ALTER TABLE [dbo].[Payment]  WITH CHECK ADD  CONSTRAINT [FK_Payment_Invoice] FOREIGN KEY([InvoiceID])
+REFERENCES [dbo].[Invoice] ([InvoiceID])
+GO
+
+ALTER TABLE [dbo].[Payment] CHECK CONSTRAINT [FK_Payment_Invoice]
+GO
+
+ALTER TABLE [dbo].[PenaltyOrderRel]  WITH CHECK ADD  CONSTRAINT [FK_PenaltyOrderRel_Order] FOREIGN KEY([OrderID])
+REFERENCES [dbo].[Orders] ([OrderID])
+GO
+
+ALTER TABLE [dbo].[PenaltyOrderRel] CHECK CONSTRAINT [FK_PenaltyOrderRel_Order]
+GO
+
+ALTER TABLE [dbo].[PenaltyOrderRel]  WITH CHECK ADD  CONSTRAINT [FK_PenaltyOrderRel_Penalties] FOREIGN KEY([PenaltyID])
+REFERENCES [dbo].[Penalties] ([PenaltyID])
+GO
+
+ALTER TABLE [dbo].[PenaltyOrderRel] CHECK CONSTRAINT [FK_PenaltyOrderRel_Penalties]
+GO
+
+ALTER TABLE [dbo].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_Account] FOREIGN KEY([AccountID])
+REFERENCES [dbo].[Account] ([AccountID])
+GO
+
+ALTER TABLE [dbo].[Person] CHECK CONSTRAINT [FK_Person_Account]
+GO
+
+ALTER TABLE [dbo].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_CompanyEntity] FOREIGN KEY([CompanyEntityID])
+REFERENCES [dbo].[CompanyEntity] ([CompanyEntityID])
+GO
+
+ALTER TABLE [dbo].[Person] CHECK CONSTRAINT [FK_Person_CompanyEntity]
+GO
+
+ALTER TABLE [dbo].[Person]  WITH CHECK ADD  CONSTRAINT [FK_Person_RoleType] FOREIGN KEY([RoleID])
+REFERENCES [dbo].[RoleType] ([RoleID])
+GO
+
+ALTER TABLE [dbo].[Person] CHECK CONSTRAINT [FK_Person_RoleType]
+GO
+
+ALTER TABLE [dbo].[PhoneNumber]  WITH CHECK ADD  CONSTRAINT [FK_PhoneNumber_Person] FOREIGN KEY([PersonID])
+REFERENCES [dbo].[Person] ([PersonID])
+GO
+
+ALTER TABLE [dbo].[PhoneNumber] CHECK CONSTRAINT [FK_PhoneNumber_Person]
+GO
+
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD  CONSTRAINT [FK_Product_SubProductCategory] FOREIGN KEY([SubCategoryID])
+REFERENCES [dbo].[SubProductCategory] ([SubProductCategoryID])
+GO
+
+ALTER TABLE [dbo].[Product] CHECK CONSTRAINT [FK_Product_SubProductCategory]
+GO
+
+ALTER TABLE [dbo].[ProductInventory]  WITH CHECK ADD  CONSTRAINT [FK_ProductInventory_Product] FOREIGN KEY([ProductID])
+REFERENCES [dbo].[Product] ([ProductID])
+GO
+
+ALTER TABLE [dbo].[ProductInventory] CHECK CONSTRAINT [FK_ProductInventory_Product]
+GO
+
+ALTER TABLE [dbo].[ProductInventory]  WITH CHECK ADD  CONSTRAINT [FK_ProductInventory_Store] FOREIGN KEY([StoreID])
+REFERENCES [dbo].[Store] ([StoreID])
+GO
+
+ALTER TABLE [dbo].[ProductInventory] CHECK CONSTRAINT [FK_ProductInventory_Store]
+GO
+
+ALTER TABLE [dbo].[Refunds]  WITH CHECK ADD  CONSTRAINT [FK_Refunds_Retrieval] FOREIGN KEY([RetrivalID])
+REFERENCES [dbo].[Retrieval] ([RetrivalID])
+GO
+
+ALTER TABLE [dbo].[Refunds] CHECK CONSTRAINT [FK_Refunds_Retrieval]
+GO
+
+ALTER TABLE [dbo].[Retrieval]  WITH CHECK ADD  CONSTRAINT [FK_Retrieval_Employee] FOREIGN KEY([EmployeeID])
+REFERENCES [dbo].[Employee] ([EmployeeID])
+GO
+
+ALTER TABLE [dbo].[Retrieval] CHECK CONSTRAINT [FK_Retrieval_Employee]
+GO
+
+ALTER TABLE [dbo].[Retrieval]  WITH CHECK ADD  CONSTRAINT [FK_Retrieval_Order] FOREIGN KEY([OrderID])
+REFERENCES [dbo].[Orders] ([OrderID])
+GO
+
+ALTER TABLE [dbo].[Retrieval] CHECK CONSTRAINT [FK_Retrieval_Order]
+GO
+
+ALTER TABLE [dbo].[Shipment]  WITH CHECK ADD  CONSTRAINT [FK_Shipment_Employee] FOREIGN KEY([EmployeeID])
+REFERENCES [dbo].[Employee] ([EmployeeID])
+GO
+
+ALTER TABLE [dbo].[Shipment] CHECK CONSTRAINT [FK_Shipment_Employee]
+GO
+
+ALTER TABLE [dbo].[Shipment]  WITH CHECK ADD  CONSTRAINT [FK_Shipment_Order] FOREIGN KEY([OrderID])
+REFERENCES [dbo].[Orders] ([OrderID])
+GO
+
+ALTER TABLE [dbo].[Shipment] CHECK CONSTRAINT [FK_Shipment_Order]
+GO
+
+ALTER TABLE [dbo].[Store]  WITH CHECK ADD  CONSTRAINT [FK_Store_Address] FOREIGN KEY([AddressID])
+REFERENCES [dbo].[Address] ([AddressID])
+GO
+
+ALTER TABLE [dbo].[Store] CHECK CONSTRAINT [FK_Store_Address]
+GO
+
+ALTER TABLE [dbo].[SubProductCategory]  WITH CHECK ADD  CONSTRAINT [FK_SubProductCategory_ProductCategory] FOREIGN KEY([ProductCategoryID])
+REFERENCES [dbo].[ProductCategory] ([ProductCategoryID])
+GO
+
+ALTER TABLE [dbo].[SubProductCategory] CHECK CONSTRAINT [FK_SubProductCategory_ProductCategory]
+GO
+
+
